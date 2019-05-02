@@ -10,6 +10,26 @@
             </div>
         </div>
         <!-- start page title -->
+        <form action="" method="get">
+        <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="form-group mb-3">
+                        <label>Date Range</label>
+                        <input type="text" class="form-control date" id="singledaterange" name="date" value="{{$cache->date}}" data-toggle="date-picker"
+                               data-cancel-class="btn-warning">
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="form-group mb-3">
+                        <label>Search</label>
+                        <input type="submit" class="btn-success btn form-control" value="Submit">
+                    </div>
+                </div>
+
+        </div>
+        </form>
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
@@ -19,14 +39,16 @@
                                 <thead>
                                 <tr>
                                     <th>Transaction ID</th>
-                                    <th>Email Payer </th>
+                                    <th>Email Payer</th>
                                     <th>Transaction Amount</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($listtransaction["transaction_details"] as $v)
                                     <tr>
-                                        <td><a href="{{url('checktransaction?idTransaction=')}}{{$v['transaction_info']['transaction_id']}}">{{$v['transaction_info']['transaction_id']}}</a> </td>
+                                        <td>
+                                            <a href="{{url('checktransaction?idTransaction=')}}{{$v['transaction_info']['transaction_id']}}">{{$v['transaction_info']['transaction_id']}}</a>
+                                        </td>
                                         <td>{{$v['payer_info']['email_address']}}</td>
                                         <td>{{$v['transaction_info']['transaction_amount']['value']}}</td>
                                     </tr>

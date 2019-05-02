@@ -119,10 +119,19 @@ class Paypal
         return $response;
     }
 
-    public function getListTransactions()
+    public function getListTransactions($date)
     {
+        if ($date) {
+            $tg = explode(" - ", $date);
+            $tg1 = date_format(date_create($tg[0]), "Y-m-d");
+            $tg2 = date_format(date_create($tg[1]), "Y-m-d");
+        }else{
+            $tg1 = '2019-01-01';
+            $tg2 = '2019-01-25';
+        }
+
         $this->set();
-        $url = 'https://api.sandbox.paypal.com/v1/reporting/transactions?start_date=2019-01-01T00:00:00-0700&end_date=2019-01-25T23:59:59-0700&fields=all&page_size=100&page=1';
+        $url = 'https://api.sandbox.paypal.com/v1/reporting/transactions?start_date='.$tg1.'T00:00:00-0700&end_date='.$tg2.'T23:59:59-0700&fields=all&page_size=100&page=1';
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_POST, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);

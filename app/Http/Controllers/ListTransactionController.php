@@ -24,9 +24,10 @@ class ListTransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $list = $this->paypal->getListTransactions();
+        $list = $this->paypal->getListTransactions($request->date);
         $listtransaction = $list;
-        return view('listtransactions', compact('listtransaction'));
+        $cache = $request;
+        return view('listtransactions', compact('listtransaction','cache'));
     }
 
 
